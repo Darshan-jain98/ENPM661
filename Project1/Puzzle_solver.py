@@ -180,7 +180,7 @@ end_time = time.time()
 print(end_time - start_time)
 
 #Editing the nodePart file to contain the state of path to goal
-with open("nodePath.txt", "r+") as f:
+with open("Project1/nodePath.txt", "r+") as f:
     f.truncate(0)
     for i in range(len(back_track)):
         lst = Mat_2_listc(back_track[i])
@@ -193,7 +193,7 @@ with open("nodePath.txt", "r+") as f:
     f.close
 
 #Editing the Nodes file to contain the state of all nodes
-with open("Nodes.txt", "r+") as f:
+with open("Project1/Nodes.txt", "r+") as f:
     f.truncate(0)
     for i in range(len(visited_node)):
         lst = Mat_2_listc(visited_node[i][0])
@@ -205,7 +205,7 @@ with open("Nodes.txt", "r+") as f:
     f.close
 
 #Editing the NodesInfo file to contain the parent and child relationship of all the nodes
-with open("NodesInfo.txt", "r+") as f:
+with open("Project1/NodesInfo.txt", "r+") as f:
     f.truncate(0)
     str_lst = "Node Index   Parent Node"
     f.write(str_lst) 
