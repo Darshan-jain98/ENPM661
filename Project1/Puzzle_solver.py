@@ -95,15 +95,15 @@ def checker(node):
 
 #variables to be used in function
 # s = np.array([[4,1,3],[7,2,5],[0,8,6]])
-s = np.array([[1,5,2],[4,0,3],[7,8,6]])
-g = np.array([[1,2,3],[4,5,6],[7,8,0]])
+start = np.array([[1,5,2],[4,0,3],[7,8,6]])
+goal = np.array([[1,2,3],[4,5,6],[7,8,0]])
 visited_node = []
 back_track = []
-D_S = ([[s,0,0]])
+D_S = ([[start,0,0]])
 child = 1
 
 # to see if the following instance is solvable or not
-solvable = Parity_checker(Mat_2_listr(s))
+solvable = Parity_checker(Mat_2_listr(start))
 # Main while loop that generate the solution
 while True:
     # print(child)
@@ -121,7 +121,7 @@ while True:
 #For moving the blank tile left        
         poss,l_move = Move_left(node_state)
         if poss:
-            if np.array_equal(g,l_move):
+            if np.array_equal(goal,l_move):
                 visited_node.append([l_move,self_index,parent_index])
                 break
         if poss:
@@ -132,7 +132,7 @@ while True:
 #For moving the blank tile right        
         poss,r_move = Move_right(node_state)
         if poss:
-            if np.array_equal(g,r_move):
+            if np.array_equal(goal,r_move):
                 visited_node.append([r_move,self_index,parent_index])
                 break
         if poss:
@@ -143,7 +143,7 @@ while True:
 #For moving the blank tile up
         poss,u_move = Move_up(node_state)
         if poss:
-            if np.array_equal(g,u_move):
+            if np.array_equal(goal,u_move):
                 visited_node.append([u_move,self_index,parent_index])
                 break
         if poss:
@@ -153,7 +153,7 @@ while True:
 #For moving the blank tile down
         poss,d_move = Move_down(node_state)
         if poss:
-            if np.array_equal(g,d_move):
+            if np.array_equal(goal,d_move):
                 visited_node.append([d_move,self_index,parent_index])
                 break
         if poss:
@@ -173,7 +173,7 @@ while parent_ele !=0:
             break
     back_track.append(node[0])
     parent_ele = node[2]
-back_track.append(s)
+back_track.append(start)
 back_track.reverse()
 # print(len(back_track))
 end_time = time.time()

@@ -12,7 +12,7 @@ def print_matrix(state):
         counter = counter +1
         print("\n-------------")
 
-fname = 'nodePath.txt'
+fname = 'Project1/nodePath.txt'
 data = np.loadtxt(fname)
 if len(data[1]) is not 9:
     print("Format of the text file is incorrect, retry ")
