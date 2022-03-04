@@ -1,7 +1,11 @@
 import numpy as np
 import cv2
 from time import time
+from random import seed
+from random import randint
 
+print("Welcome to Path finder")
+print("The obstacles will be in dark color shade and the final path will be highlighted in white color")
 #function to check if the point is in obstacle or not
 def In_obstacle(row,col):
     inCircle = False
@@ -135,9 +139,9 @@ def Move_downright(node):
     else:
         return False, node
    
-
+#continues loop to take correct input for initial and goal node from user
 while True:
-    print("All the values should be between (0,399) for x and (0, 249) ")
+    print("All the values should be between (0,399) for x and (0, 249) for y with origin at bottom right corner")
     initial_x = int(input("Enter x coordinate of initial node: "))
     initial_y = int(input("Enter y coordinate of initial node: ")) 
     Initial_row = 249 - initial_y
@@ -150,13 +154,21 @@ while True:
         if not In_obstacle(Goal_row,Goal_col):
             break
     print("Enter valid input for initail and final position")
+
+
 print("------------------")
-print(Goal_row,"  ", Goal_col)
+print("Goal_row   Goal_col")
+print(Goal_row,"         ", Goal_col)
 print("------------------")
+
+#dictionary to store the data for each node
 # open_list = {(row,col): (self_index, parent_index, cost)}
 # close_list = {(row,col): (self_index, parent_index, cost)}
 open_list = {}
 close_list = {}
+
+
+#cost to move in diagnol and straight
 cost_diagnol = 1.4
 cost_straight = 1
 open_list[(Initial_row,Initial_col)] = [1,0,0]
@@ -164,13 +176,11 @@ goal_node = (Goal_row,Goal_col)
 node_count = 1
 current_node = [Initial_row,Initial_col]
 start_time = time()
-counter = 0
+
+print("Path finder has started")
+# The main loop that generates the path
 while True:
-    counter = counter +1
-    print(counter)
-    print("------------------")
-    # print("open_list before loop", open_list)
-    # print("close list before loop",close_list)
+    # Function to pull the node with minimum cost from the open_list
     min_cost = np.inf
     for key,value in open_list.items():
         if open_list[key][2] <= min_cost:
@@ -186,7 +196,8 @@ while True:
     if current_node[0] == goal_node[0] and current_node[1] == goal_node[1]:
         close_list[(current_node[0],current_node[1])] = data
         break
-
+    
+    #The following part of code sets the new node and appends it in open_list if not present or update its cost if present
     Poss,New_node = Move_left(current_node)
     if Poss:
         if not (New_node in close_list):
@@ -197,7 +208,6 @@ while True:
             else:
                 open_list[New_node] = [node_count,current_index,round(current_c2c+cost_straight,2)]
                 node_count = node_count + 1
-                # close_list[(tuple(current_node))] = data
 
     Poss,New_node = Move_upleft(current_node)
     if Poss:
@@ -209,8 +219,6 @@ while True:
             else:
                 node_count = node_count + 1
                 open_list[New_node] = [node_count,current_index,round(current_c2c+cost_diagnol,2)]
-                # close_list[(tuple(current_node))] = data
-                
     
     Poss,New_node = Move_up(current_node)
     if Poss:
@@ -223,7 +231,6 @@ while True:
                 node_count = node_count + 1
                 open_list[New_node] = [node_count,current_index,round(current_c2c+cost_straight,2)]
                 
-
     Poss,New_node = Move_upright(current_node)
     if Poss:
         if not (New_node in close_list):
@@ -282,10 +289,9 @@ while True:
     if(not bool(open_list)):
         print("solution not found")
         break
+print("Path has been found know back tracking will start")
 
-end_time = time()
-
-print(end_time-start_time)
+#The back_track part
 close_lst = list(close_list.items())
 back_track = [close_lst[-1][0]]
 parent = close_lst[-1][1][1]
@@ -296,34 +302,29 @@ while parent !=0:
             back_track.append(close_lst[i][0])
             parent = close_lst[i][1][1]
             break
-# print(len(back_track))
-# print("----------")
-# print(back_track)
-# print("----------")
+print("Back tracking done now visualization will start")
+end_time = time()
+print("Time Taken to find a path and back Track it is: ",end_time-start_time)
+
+# The visualization part
 viz_matrix = np.zeros((250,400,3),np.uint8)
 for i in range(250):
     for j in range(400):
         if In_obstacle(i,j):
-            viz_matrix[i][j] = (0,255,255)
-# print(In_obstacle(150,200))
-# for i in range(180,190):
-#     for j in range(200,210):
-#         viz_matrix[i][j] = (255,255,255)
+            viz_matrix[i][j] = (randint(50,150),randint(100,150),randint(100,150))
+
 cv2.imshow("img", viz_matrix)
 cv2.waitKey(50)
 
 for i in range(len(close_lst)):
-    viz_matrix[close_lst[i][0][0],close_lst[i][0][1]] = (0,0,255)
+    viz_matrix[close_lst[i][0][0],close_lst[i][0][1]] = (randint(100,150),randint(100,150),randint(50,100))
     cv2.imshow("img", viz_matrix)
     cv2.waitKey(1)
-for i in range(250):
-    for j in range(400):
-        if In_obstacle(i,j):
-            viz_matrix[i][j] = (0,255,255)
 
 for i in range(len(back_track)):
     viz_matrix[back_track[i][0],back_track[i][1]] = (255,255,255)
     cv2.imshow("img", viz_matrix)
     cv2.waitKey(50)
 cv2.waitKey(0)
+print("Visualization done")
 print("THANK YOU")
