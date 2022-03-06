@@ -12,11 +12,12 @@ ________________________________________________________________________________
 =======
 
 Libraries used:
+
 cv2
+
 numpy
 
-[![Watch the video]](https://drive.google.com/file/d/1AA5y7JwIchcDOtTIrHj47BOit2UM8hFm/view?usp=sharing)
->>>>>>> f865c2550251a1b37683cb75ae74a2d273238b3b
+
 
 ![](image/image.png)
 
