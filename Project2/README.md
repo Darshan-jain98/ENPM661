@@ -3,10 +3,13 @@ The obstacle will be shown in dark shades and the final path will be highlighted
 There is a clearance of 5mm from the obstacle and the outer rectangle and it will be highlighted in black
 
 video link: https://drive.google.com/file/d/1AA5y7JwIchcDOtTIrHj47BOit2UM8hFm/view?usp=sharing
+
 Libraries used:
 cv2
 numpy
+
 [![Watch the video]](https://drive.google.com/file/d/1AA5y7JwIchcDOtTIrHj47BOit2UM8hFm/view?usp=sharing)
+
 ![](image/image.png)
 
 Steps to run the code
