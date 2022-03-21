@@ -10,20 +10,13 @@ cv2
 numpy
 __________________________________________________________________________________________________________
 
-Libraries used:
-
-cv2
-
-numpy
-
-
 
 ![](image/image.png)
 
 ___________________________________________________________________________________________________________
 Steps to run the code
 1. open the Dijkstra-pathplanning-Darshan-Jain.py file and run the file.
-2. You will be prompted to input the goal and initial points in X-Y co-ordinates with origin in the bottom right till you enter the right co-ordinates
+2. You will be prompted to input the goal and initial points in X-Y co-ordinates with origin in the bottom left till you enter the right co-ordinates
 3. After entering the co-ordinates the path planner will find the path from start to end and will visualize the path using opencv.
 4. After visualize and visualizing the path enter the ESC key to end the visualization.
 ____________________________________________________________________________________________________________
